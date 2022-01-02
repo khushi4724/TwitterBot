@@ -45,7 +45,7 @@ def perform_twitter_action(action, tweet_handle):
 
 def clear():
     """
-    Clears all tweets and favorited tweets from a twitter account.
+    Clears all tweets from a twitter account.
     """
     for user_id in api.friends_ids():
         api.destroy_friendship(user_id)
@@ -60,7 +60,6 @@ def main():
     results = Cursor(api.search, q="chance to win").items(1000)
     for i, result in enumerate(results):
         actions = parse(result.text.lower())
-        # If there are twitter actions to perform, it's likely an contest.
         for action in actions:
             try:
                 perform_twitter_action(action, result)
